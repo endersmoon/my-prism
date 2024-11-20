@@ -6,6 +6,7 @@ import ArticleSection from '@/components/article';
 import HeaderSection from'@/components/headerSection'
 import FooterSection from '@/components/footerSection';
 import NumberedListSection from '@/components/numberedListSection';
+import SurveySection from '@/components/survey';
 
 export const config: Config = {
   components: {
@@ -334,6 +335,47 @@ export const config: Config = {
         );
       },
     },
+    SurveySection: {
+      fields: {
+        highlightText: {
+          type: 'text',
+        },
+        headingText: {
+          type: 'text',
+        },
+        questionText: {
+          type: 'text',
+        },
+        ratingLink: {
+          type: 'text',
+        },
+      },
+      defaultProps: {
+        highlightText: "Your opinion matters",
+        headingText: "We want to hear you",
+        questionText: "How would you rate your experience using our product in a scale from 1 to 5?",
+        ratingLink: "https://example.com/rate"
+      },
+      render: ({ highlightText, headingText, questionText, ratingLink }) => {
+        return (
+          <SurveySection
+            highlightText={highlightText}
+            headingText={headingText}
+            questionText={questionText}
+            ratingLink={ratingLink}
+          />
+        );
+      },
+    },
+  },
+  categories: {
+    Sections: {
+      components: ["HeaderSection", "FooterSection","Article", "SurveySection"],
+    },
+    Blocks:{
+      components:["SectionHeader","NumberedListSection","ImageGrid"]
+    }
+
   },
   root: {
     render: ({ children }: { children: React.ReactNode }) => {
