@@ -77,44 +77,7 @@ export const config: Config = {
           },
         },
       },
-      resolveFields: (data) => {
-        const fields = {
-          variant: {
-            type: "select" as const,
-            options: [
-              { label: "Centered", value: "centered" },
-              { label: "Side", value: "side" },
-              { label: "Social", value: "social" },
-            ],
-          },
-          logoUrl: { type: "text" as const },
-          logoAlt: { type: "text" as const },
-          logoHeight: { type: "text" as const },
-          links: {
-            type: "array" as const,
-            arrayFields: {
-              text: { type: "text" },
-              href: { type: "text" },
-            },
-          },
-        };
-
-        if (data.props.variant === "social") {
-          return {
-            ...fields,
-            socialLinks: {
-              type: "array",
-              arrayFields: {
-                icon: { type: "text" },
-                alt: { type: "text" },
-                href: { type: "text" },
-              },
-            },
-          };
-        }
-
-        return fields;
-      },
+    
       defaultProps: {
         variant: "centered",
         logoUrl: "https://react.email/static/logo-without-background.png",
@@ -202,7 +165,7 @@ export const config: Config = {
         },
         socialLinks: {
           type: 'object',
-          fields: {
+          objectFields: {
             facebook: { type: 'text' },
             twitter: { type: 'text' },
             instagram: { type: 'text' },
@@ -794,7 +757,7 @@ export const config: Config = {
         },
         style: {
           type: 'object',
-          fields: {
+          objectFields: {
             borderColor: { type: 'text' },
             borderWidth: { type: 'text' },
             margin: { type: 'text' },
