@@ -7,12 +7,44 @@ interface ImagePickerProps {
 }
 
 const SAMPLE_IMAGES = [
-  'https://react.email/static/logo-without-background.png',
-  'https://react.email/static/herman-miller-chair.jpg',
-  'https://react.email/static/monty-art-cup-1.jpg',
-  'https://react.email/static/monty-art-cup-2.jpg',
-  // Add more sample images here
-];
+    "https://ik.imagekit.io/prismkit/adhbut.jpg",
+    "https://ik.imagekit.io/prismkit/application.jpg",
+    "https://ik.imagekit.io/prismkit/Camp1.jpg",
+    "https://ik.imagekit.io/prismkit/Camp2.jpg",
+    "https://ik.imagekit.io/prismkit/Camp3.jpg",
+    "https://ik.imagekit.io/prismkit/campus.jpg",
+    "https://ik.imagekit.io/prismkit/chairs person.jpg",
+    "https://ik.imagekit.io/prismkit/claim.jpg",
+    "https://ik.imagekit.io/prismkit/college.jpg",
+    "https://ik.imagekit.io/prismkit/degree.jpg",
+    "https://ik.imagekit.io/prismkit/engaged.jpg",
+    "https://ik.imagekit.io/prismkit/findjob.jpg",
+    "https://ik.imagekit.io/prismkit/free credits.jpg",
+    "https://ik.imagekit.io/prismkit/gold-1.jpg",
+    "https://ik.imagekit.io/prismkit/gold.jpg",
+    "https://ik.imagekit.io/prismkit/grad.jpg",
+    "https://ik.imagekit.io/prismkit/handshake.jpg",
+    "https://ik.imagekit.io/prismkit/hello.jpg",
+    "https://ik.imagekit.io/prismkit/jobop.jpg",
+    "https://ik.imagekit.io/prismkit/laptop.jpg",
+    "https://ik.imagekit.io/prismkit/money.jpg",
+    "https://ik.imagekit.io/prismkit/News.jpg",
+    "https://ik.imagekit.io/prismkit/newyear.jpg",
+    "https://ik.imagekit.io/prismkit/offline.jpg",
+    "https://ik.imagekit.io/prismkit/Packet.jpg",
+    "https://ik.imagekit.io/prismkit/people.jpg",
+    "https://ik.imagekit.io/prismkit/Reminder.jpg",
+    "https://ik.imagekit.io/prismkit/res.jpg",
+    "https://ik.imagekit.io/prismkit/resume rea.jpg",
+    "https://ik.imagekit.io/prismkit/resume.jpg",
+    "https://ik.imagekit.io/prismkit/sweets.jpg",
+    "https://ik.imagekit.io/prismkit/thumbsup.jpg",
+    "https://ik.imagekit.io/prismkit/Trial1.jpg",
+    "https://ik.imagekit.io/prismkit/Trial2.jpg",
+    "https://ik.imagekit.io/prismkit/Trial3.jpg",
+    "https://ik.imagekit.io/prismkit/Trial4.jpg",
+    "https://ik.imagekit.io/prismkit/xmas.jpg"
+  ];
 
 export const ImagePicker: React.FC<ImagePickerProps> = ({ value, onChange, onClose }) => {
   return (
