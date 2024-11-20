@@ -47,6 +47,25 @@ const SAMPLE_IMAGES = [
   ];
 
 export const ImagePicker: React.FC<ImagePickerProps> = ({ value, onChange, onClose }) => {
+  const [isGenerating, setIsGenerating] = useState(false);
+  const [prompt, setPrompt] = useState('');
+  const [activeTab, setActiveTab] = useState<'gallery' | 'ai' | 'url'>('gallery');
+
+  const simulateAIGeneration = async () => {
+    if (!prompt.trim()) {
+      alert('Please enter a prompt first');
+      return;
+    }
+    
+    setIsGenerating(true);
+    // Simulate API call delay
+    await new Promise(resolve => setTimeout(resolve, 3000));
+    // For demo, just select a random image from the sample images
+    const randomImage = SAMPLE_IMAGES[Math.floor(Math.random() * SAMPLE_IMAGES.length)];
+    onChange(randomImage);
+    setIsGenerating(false);
+  };
+
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
       <div className="bg-white rounded-lg p-6 max-w-2xl w-full max-h-[80vh] overflow-y-auto">
@@ -59,38 +78,103 @@ export const ImagePicker: React.FC<ImagePickerProps> = ({ value, onChange, onClo
             ✕
           </button>
         </div>
-        
-        <div className="grid grid-cols-2 gap-4">
-          {SAMPLE_IMAGES.map((src, index) => (
-            <div 
-              key={index}
-              className={`cursor-pointer border-2 rounded-lg p-2 ${
-                value === src ? 'border-blue-500' : 'border-gray-200'
-              }`}
-              onClick={() => {
-                onChange(src);
-                onClose();
-              }}
-            >
-              <img 
-                src={src} 
-                alt={`Sample image ${index + 1}`}
-                className="object-cover w-full h-40 rounded"
-              />
-            </div>
-          ))}
+
+        <div className="mb-4 border-b border-gray-200">
+          <nav className="flex space-x-4" aria-label="Tabs">
+            {[
+              { id: 'gallery', label: 'Gallery' },
+              { id: 'ai', label: 'AI Generation' },
+              { id: 'url', label: 'URL' },
+            ].map((tab) => (
+              <button
+                key={tab.id}
+                onClick={() => setActiveTab(tab.id as typeof activeTab)}
+                className={`py-2 px-3 border-b-2 font-medium text-sm ${
+                  activeTab === tab.id
+                    ? 'border-blue-500 text-blue-600'
+                    : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                }`}
+              >
+                {tab.label}
+              </button>
+            ))}
+          </nav>
         </div>
 
-        <div className="mt-4">
-          <p className="mb-2 text-sm text-gray-600">Or enter image URL:</p>
-          <input
-            type="text"
-            value={value}
-            onChange={(e) => onChange(e.target.value)}
-            className="w-full p-2 border rounded"
-            placeholder="https://example.com/image.jpg"
-          />
-        </div>
+        {activeTab === 'gallery' && (
+          <div className="grid grid-cols-2 gap-4">
+            {SAMPLE_IMAGES.map((src, index) => (
+              <div 
+                key={index}
+                className={`cursor-pointer border-2 rounded-lg p-2 ${
+                  value === src ? 'border-blue-500' : 'border-gray-200'
+                }`}
+                onClick={() => {
+                  onChange(src);
+                  onClose();
+                }}
+              >
+                <img 
+                  src={src} 
+                  alt={`Sample image ${index + 1}`}
+                  className="object-cover w-full h-40 rounded"
+                />
+              </div>
+            ))}
+          </div>
+        )}
+
+        {activeTab === 'ai' && (
+          <div className="space-y-3">
+            <div>
+              <label htmlFor="prompt" className="block mb-1 text-sm font-medium text-gray-700">
+                Enter prompt for AI generation
+              </label>
+              <textarea
+                id="prompt"
+                value={prompt}
+                onChange={(e) => setPrompt(e.target.value)}
+                placeholder="Describe the image you want to generate..."
+                className="w-full h-24 p-3 border rounded-lg resize-none"
+                disabled={isGenerating}
+              />
+            </div>
+            <button
+              onClick={simulateAIGeneration}
+              disabled={isGenerating}
+              className={`w-full p-3 rounded-lg ${
+                isGenerating 
+                  ? 'bg-gray-300 cursor-not-allowed' 
+                  : 'bg-blue-500 hover:bg-blue-600 text-white'
+              }`}
+            >
+              {isGenerating ? (
+                <div className="flex items-center justify-center gap-2">
+                  <div className="w-5 h-5 border-t-2 border-b-2 border-white rounded-full animate-spin"></div>
+                  Generating...
+                </div>
+              ) : (
+                'Generate Image'
+              )}
+            </button>
+          </div>
+        )}
+
+        {activeTab === 'url' && (
+          <div>
+            <label htmlFor="url" className="block mb-1 text-sm font-medium text-gray-700">
+              Enter image URL
+            </label>
+            <input
+              id="url"
+              type="text"
+              value={value}
+              onChange={(e) => onChange(e.target.value)}
+              className="w-full p-2 border rounded"
+              placeholder="https://example.com/image.jpg"
+            />
+          </div>
+        )}
       </div>
     </div>
   );
