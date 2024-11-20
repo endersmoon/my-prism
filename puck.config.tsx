@@ -3,9 +3,31 @@ import ImageGrid from '@/components/imageGrid';
 import { Container } from '@react-email/components';
 import { Config } from '@measured/puck';
 import ArticleSection from '@/components/article';
+import HeaderSection from'@/components/headerSection'
 
 export const config: Config = {
   components: {
+    HeaderSection:{
+      fields:{
+        variant:{
+          type:"select",
+          options: [
+            { label: "Centered", value: "centered" },
+            { label: "Side", value: "side" },
+            { label: "Social", value: "social" },
+          ],
+        }
+      },
+      defaultProps:{
+        variant:"centered"
+      },
+      render:({variant})=>{
+        return(
+          <HeaderSection type={variant} />
+        )
+      }
+
+    },
     SectionHeader: {
       fields: {
         overLine: {
@@ -37,17 +59,17 @@ export const config: Config = {
       resolveFields: (data) => {
         const fields = {
           count: {
-            type: 'radio',
+            type: 'radio' as const,
             options: [
               { label: 'Single Image', value: '1' },
               { label: 'Two Images', value: '2' }
             ]
           },
           image1Url: {
-            type: 'text',
+            type: 'text' as const,
           },
           image1Alt: {
-            type: 'text',
+            type: 'text' as const,
           }
         };
 
@@ -149,7 +171,7 @@ export const config: Config = {
   root: {
     render: ({ children }: { children: React.ReactNode }) => {
       return (
-        <Container className='min-h-screen bg-white'>{children}</Container>
+        <Container className='p-12 bg-white '>{children}</Container>
       );
     },
   },
