@@ -105,6 +105,57 @@ export const config: Config = {
         );
       }
     },
+    FooterSection: {
+      fields: {
+        logoSrc: {
+          type: 'text',
+        },
+        companyName: {
+          type: 'text',
+        },
+        tagline: {
+          type: 'text',
+        },
+        address: {
+          type: 'text',
+        },
+        contactInfo: {
+          type: 'text',
+        },
+        socialLinks: {
+          type: 'object',
+          fields: {
+            facebook: { type: 'text' },
+            twitter: { type: 'text' },
+            instagram: { type: 'text' },
+          },
+        },
+      },
+      defaultProps: {
+        logoSrc: 'https://react.email/static/logo-without-background.png',
+        companyName: 'Acme corporation',
+        tagline: 'Think different',
+        address: '123 Main Street Anytown, CA 12345',
+        contactInfo: 'mail@example.com +123456789',
+        socialLinks: {
+          facebook: '#',
+          twitter: '#',
+          instagram: '#'
+        }
+      },
+      render: ({ logoSrc, companyName, tagline, address, contactInfo, socialLinks }) => {
+        return (
+          <FooterSection 
+            logoSrc={logoSrc}
+            companyName={companyName}
+            tagline={tagline}
+            address={address}
+            contactInfo={contactInfo}
+            socialLinks={socialLinks}
+          />
+        );
+      }
+    },
     SectionHeader: {
       fields: {
         overLine: {
@@ -128,57 +179,6 @@ export const config: Config = {
             overLine={overLine}
             heading={heading}
             description={description}
-          />
-        );
-      },
-    },
-    ImageGrid: {
-      resolveFields: (data) => {
-        const fields = {
-          count: {
-            type: 'radio' as const,
-            options: [
-              { label: 'Single Image', value: '1' },
-              { label: 'Two Images', value: '2' }
-            ]
-          },
-          image1Url: {
-            type: 'text' as const,
-          },
-          image1Alt: {
-            type: 'text' as const,
-          }
-        };
-
-        if (data.props.count == 2) {
-          return {
-            ...fields,
-            image2Url: {
-              type: 'text',
-            },
-            image2Alt: {
-              type: 'text',
-            }
-          };
-        }
-
-        return fields;
-      },
-      defaultProps: {
-        count: '1',
-        image1Url: 'https://react.email/static/monty-art-cup-1.jpg',
-        image1Alt: 'Mugs Collection',
-        image2Url: 'https://react.email/static/monty-art-cup-2.jpg',
-        image2Alt: 'Monty Art Cup - 2',
-      },
-      render: ({ count, image1Url, image1Alt, image2Url, image2Alt }) => {
-        return (
-          <ImageGrid
-            count={Number(count)}
-            image1Url={image1Url}
-            image1Alt={image1Alt}
-            image2Url={image2Url}
-            image2Alt={image2Alt}
           />
         );
       },
@@ -243,57 +243,6 @@ export const config: Config = {
           />
         );
       },
-    },
-    FooterSection: {
-      fields: {
-        logoSrc: {
-          type: 'text',
-        },
-        companyName: {
-          type: 'text',
-        },
-        tagline: {
-          type: 'text',
-        },
-        address: {
-          type: 'text',
-        },
-        contactInfo: {
-          type: 'text',
-        },
-        socialLinks: {
-          type: 'object',
-          fields: {
-            facebook: { type: 'text' },
-            twitter: { type: 'text' },
-            instagram: { type: 'text' },
-          },
-        },
-      },
-      defaultProps: {
-        logoSrc: 'https://react.email/static/logo-without-background.png',
-        companyName: 'Acme corporation',
-        tagline: 'Think different',
-        address: '123 Main Street Anytown, CA 12345',
-        contactInfo: 'mail@example.com +123456789',
-        socialLinks: {
-          facebook: '#',
-          twitter: '#',
-          instagram: '#'
-        }
-      },
-      render: ({ logoSrc, companyName, tagline, address, contactInfo, socialLinks }) => {
-        return (
-          <FooterSection 
-            logoSrc={logoSrc}
-            companyName={companyName}
-            tagline={tagline}
-            address={address}
-            contactInfo={contactInfo}
-            socialLinks={socialLinks}
-          />
-        );
-      }
     },
     NumberedListSection: {
       fields: {
@@ -363,6 +312,57 @@ export const config: Config = {
             headingText={headingText}
             questionText={questionText}
             ratingLink={ratingLink}
+          />
+        );
+      },
+    },
+    ImageGrid: {
+      resolveFields: (data) => {
+        const fields = {
+          count: {
+            type: 'radio' as const,
+            options: [
+              { label: 'Single Image', value: '1' },
+              { label: 'Two Images', value: '2' }
+            ]
+          },
+          image1Url: {
+            type: 'text' as const,
+          },
+          image1Alt: {
+            type: 'text' as const,
+          }
+        };
+
+        if (data.props.count == 2) {
+          return {
+            ...fields,
+            image2Url: {
+              type: 'text',
+            },
+            image2Alt: {
+              type: 'text',
+            }
+          };
+        }
+
+        return fields;
+      },
+      defaultProps: {
+        count: '1',
+        image1Url: 'https://react.email/static/monty-art-cup-1.jpg',
+        image1Alt: 'Mugs Collection',
+        image2Url: 'https://react.email/static/monty-art-cup-2.jpg',
+        image2Alt: 'Monty Art Cup - 2',
+      },
+      render: ({ count, image1Url, image1Alt, image2Url, image2Alt }) => {
+        return (
+          <ImageGrid
+            count={Number(count)}
+            image1Url={image1Url}
+            image1Alt={image1Alt}
+            image2Url={image2Url}
+            image2Alt={image2Alt}
           />
         );
       },
@@ -463,16 +463,56 @@ export const config: Config = {
         content: {
           type: 'text',
         },
-        className: {
-          type: 'text',
+        as: {
+          type: 'select',
+          options: [
+            { label: 'H1', value: 'h1' },
+            { label: 'H2', value: 'h2' },
+            { label: 'H3', value: 'h3' },
+            { label: 'H4', value: 'h4' },
+            { label: 'H5', value: 'h5' },
+            { label: 'H6', value: 'h6' },
+          ],
+        },
+        alignment: {
+          type: 'select',
+          options: [
+            { label: 'Left', value: 'left' },
+            { label: 'Center', value: 'center' },
+            { label: 'Right', value: 'right' },
+          ],
         },
       },
       defaultProps: {
         content: 'This is a heading',
-        className: 'text-2xl font-bold text-gray-900',
+        as: 'h1',
+        alignment: 'left',
       },
-      render: ({ content, className }) => {
-        return <Heading className={className}>{content}</Heading>;
+      render: ({ content, as, alignment }) => {
+        const fontSizes = {
+          h1: '36px',
+          h2: '30px',
+          h3: '24px',
+          h4: '20px',
+          h5: '18px',
+          h6: '16px',
+        };
+
+        return (
+          <Heading
+            as={as}
+            style={{
+              fontSize: fontSizes[as],
+              margin: '0',
+              fontWeight: 'bold',
+              lineHeight: '1.2',
+              padding: '1.5rem 0',
+              textAlign: alignment,
+            }}
+          >
+            {content}
+          </Heading>
+        );
       },
     },
     Hr: {
@@ -503,20 +543,20 @@ export const config: Config = {
     },
   },
   categories: {
-    Sections: {
-      components: ["HeaderSection", "FooterSection","Article", "SurveySection"],
+    Layout: {
+      components: ["HeaderSection", "FooterSection"],
     },
-    Blocks:{
-      components:["SectionHeader","NumberedListSection","ImageGrid"]
+    Content: {
+      components: ["Article", "SurveySection", "SectionHeader", "NumberedListSection", "ImageGrid"],
     },
-    Elements: {
+    Basic: {
       components: ["Text", "Image", "Button", "Heading", "Hr"]
     }
   },
   root: {
     render: ({ children }: { children: React.ReactNode }) => {
       return (
-        <Container className='p-12 bg-white '>{children}</Container>
+        <Container className="p-12 bg-white">{children}</Container>
       );
     },
   },
