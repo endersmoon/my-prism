@@ -562,18 +562,60 @@ export const config: Config = {
     Text: {
       fields: {
         content: {
-          type: 'text',
+          type: 'textarea',
         },
-        className: {
-          type: 'text',
+        size: {
+          type: 'select',
+          options: [
+            { label: 'Small', value: 'small' },
+            { label: 'Normal', value: 'normal' },
+            { label: 'Big', value: 'big' },
+          ],
+        },
+        alignment: {
+          type: 'select',
+          options: [
+            { label: 'Left', value: 'left' },
+            { label: 'Center', value: 'center' },
+            { label: 'Right', value: 'right' },
+          ],
+        },
+        color: {
+          type: 'select',
+          options: [
+            { label: 'Normal', value: 'normal' },
+            { label: 'Muted', value: 'muted' },
+          ],
         },
       },
       defaultProps: {
         content: 'This is a text block',
-        className: 'text-base text-gray-700',
+        size: 'normal',
+        alignment: 'left',
+        color: 'normal',
       },
-      render: ({ content, className }) => {
-        return <Text className={className}>{content}</Text>;
+      render: ({ content, size, alignment, color }) => {
+        const fontSize = {
+          small: '14px',
+          normal: '16px',
+          big: '18px',
+        };
+
+        const textColor = {
+          normal: '#000000',
+          muted: '#6B7280',
+        };
+
+        return (
+          <Text style={{
+            fontSize: fontSize[size],
+            textAlign: alignment,
+            lineHeight: '1.5',
+            color: textColor[color],
+          }}>
+            {content}
+          </Text>
+        );
       },
     },
     Image: {
