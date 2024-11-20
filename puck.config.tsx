@@ -1,6 +1,6 @@
 import TypeSection from '@/components/typeSection';
 import ImageGrid from '@/components/imageGrid';
-import { Container } from '@react-email/components';
+import { Container, Text, Button, Img, Heading, Hr, Row, Column } from '@react-email/components';
 import { Config } from '@measured/puck';
 import ArticleSection from '@/components/article';
 import HeaderSection from'@/components/headerSection'
@@ -367,6 +367,139 @@ export const config: Config = {
         );
       },
     },
+    Text: {
+      fields: {
+        content: {
+          type: 'text',
+        },
+        className: {
+          type: 'text',
+        },
+      },
+      defaultProps: {
+        content: 'This is a text block',
+        className: 'text-base text-gray-700',
+      },
+      render: ({ content, className }) => {
+        return <Text className={className}>{content}</Text>;
+      },
+    },
+    Image: {
+      fields: {
+        src: {
+          type: 'text',
+        },
+        alt: {
+          type: 'text',
+        },
+        width: {
+          type: 'text',
+        },
+        height: {
+          type: 'text',
+        },
+      },
+      defaultProps: {
+        src: 'https://react.email/static/logo-without-background.png',
+        alt: 'Image',
+        width: '100%',
+        height: 'auto',
+      },
+      render: ({ src, alt, width, height }) => {
+        return <Img src={src} alt={alt} width={width} height={height} />;
+      },
+    },
+    Button: {
+      fields: {
+        buttons: {
+          type: 'array',
+          arrayFields: {
+            text: { type: 'text' },
+            href: { type: 'text' },
+          }
+        }
+      },
+      defaultProps: {
+        buttons: [{
+          text: 'Click me',
+          href: '#',
+        }]
+      },
+      render: ({ buttons }) => {
+        return (
+          <Row style={{ width: "100%" }}>
+            {buttons.map((button, index) => (
+              <Column 
+                key={index} 
+                style={{ 
+                  width: `${100 / buttons.length}%`,
+                  paddingRight: index !== buttons.length - 1 ? "12px" : "0"
+                }}
+              >
+                <Button
+                  href={button.href}
+                  style={{
+                    width: "100%",
+                    boxSizing: "border-box",
+                    padding: 12,
+                    fontWeight: 600,
+                    borderRadius: 8,
+                    textAlign: "center",
+                    backgroundColor: "rgb(79,70,229)",
+                    color: "rgb(255,255,255)",
+                  }}
+                >
+                  {button.text}
+                </Button>
+              </Column>
+            ))}
+          </Row>
+        );
+      },
+    },
+    Heading: {
+      fields: {
+        content: {
+          type: 'text',
+        },
+        className: {
+          type: 'text',
+        },
+      },
+      defaultProps: {
+        content: 'This is a heading',
+        className: 'text-2xl font-bold text-gray-900',
+      },
+      render: ({ content, className }) => {
+        return <Heading className={className}>{content}</Heading>;
+      },
+    },
+    Hr: {
+      fields: {
+        className: {
+          type: 'text',
+        },
+        style: {
+          type: 'object',
+          fields: {
+            borderColor: { type: 'text' },
+            borderWidth: { type: 'text' },
+            margin: { type: 'text' },
+          },
+        },
+      },
+      defaultProps: {
+        className: 'w-full',
+        style: {
+          borderColor: '#CBD5E1',
+          borderWidth: '1px',
+          margin: '16px 0',
+        },
+      },
+      render: ({ className, style }) => {
+        return <Hr className={className} style={style} />;
+      },
+    },
   },
   categories: {
     Sections: {
@@ -374,8 +507,10 @@ export const config: Config = {
     },
     Blocks:{
       components:["SectionHeader","NumberedListSection","ImageGrid"]
+    },
+    Elements: {
+      components: ["Text", "Image", "Button", "Heading", "Hr"]
     }
-
   },
   root: {
     render: ({ children }: { children: React.ReactNode }) => {
