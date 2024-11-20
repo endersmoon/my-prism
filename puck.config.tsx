@@ -427,7 +427,7 @@ export const config: Config = {
       },
       render: ({ buttons }) => {
         return (
-          <Row style={{ width: "100%" }}>
+          <Row style={{ width: "100%", marginTop: "24px", marginBottom: "24px" }}>
             {buttons.map((button, index) => (
               <Column 
                 key={index} 
@@ -445,8 +445,9 @@ export const config: Config = {
                     fontWeight: 600,
                     borderRadius: 8,
                     textAlign: "center",
-                    backgroundColor: "rgb(79,70,229)",
-                    color: "rgb(255,255,255)",
+                    backgroundColor: index === 0 ? "rgb(79,70,229)" : "transparent",
+                    color: index === 0 ? "rgb(255,255,255)" : "rgb(79,70,229)",
+                    border: index === 0 ? "none" : "1px solid rgb(79,70,229)",
                   }}
                 >
                   {button.text}
