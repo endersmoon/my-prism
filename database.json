@@ -1,1 +1,1 @@
-{"/":{"content":[{"type":"HeadingBlock","props":{"title":"Edit this page by adding /edit to the end of the URL","id":"HeadingBlock-1694032984497"}}],"root":{"props": {"title":""}}}}
+{"/":{"content":[{"type":"SectionHeader","props":{"overLine":"Brand new","heading":"Super heading","description":"This is a full line description","id":"SectionHeader-5b271f39-13aa-448c-b97c-2f9644b1e884"}},{"type":"ImageGrid","props":{"count":1,"id":"ImageGrid-f75965de-7333-4be2-bfa5-37412cd7f4ee"}}],"root":{"props":{"title":""}},"zones":{}}}
