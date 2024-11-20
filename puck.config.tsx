@@ -23,7 +23,45 @@ export const config: Config = {
           ],
         },
         logoUrl: {
-          type: "text",
+          type: 'custom',
+          render: ({ name, value, onChange }) => {
+            const [isModalOpen, setIsModalOpen] = useState(false);
+
+            return (
+              <div>
+                <div className="flex items-center gap-2">
+                  <input 
+                    type="text" 
+                    value={value} 
+                    onChange={(e) => onChange(e.target.value)}
+                    className="flex-1 p-2 border rounded"
+                  />
+                  <button
+                    onClick={() => setIsModalOpen(true)}
+                    className="px-4 py-2 text-white bg-indigo-600 rounded hover:bg-indigo-700"
+                  >
+                    Browse
+                  </button>
+                </div>
+                {value && (
+                  <div className="mt-2">
+                    <img 
+                      src={value} 
+                      alt="Preview" 
+                      className="object-contain h-32 max-w-full"
+                    />
+                  </div>
+                )}
+                {isModalOpen && (
+                  <ImagePicker
+                    value={value}
+                    onChange={onChange}
+                    onClose={() => setIsModalOpen(false)}
+                  />
+                )}
+              </div>
+            );
+          }
         },
         logoAlt: {
           type: "text",
@@ -110,7 +148,45 @@ export const config: Config = {
     FooterSection: {
       fields: {
         logoSrc: {
-          type: 'text',
+          type: 'custom',
+          render: ({ name, value, onChange }) => {
+            const [isModalOpen, setIsModalOpen] = useState(false);
+
+            return (
+              <div>
+                <div className="flex items-center gap-2">
+                  <input 
+                    type="text" 
+                    value={value} 
+                    onChange={(e) => onChange(e.target.value)}
+                    className="flex-1 p-2 border rounded"
+                  />
+                  <button
+                    onClick={() => setIsModalOpen(true)}
+                    className="px-4 py-2 text-white bg-indigo-600 rounded hover:bg-indigo-700"
+                  >
+                    Browse
+                  </button>
+                </div>
+                {value && (
+                  <div className="mt-2">
+                    <img 
+                      src={value} 
+                      alt="Preview" 
+                      className="object-contain h-32 max-w-full"
+                    />
+                  </div>
+                )}
+                {isModalOpen && (
+                  <ImagePicker
+                    value={value}
+                    onChange={onChange}
+                    onClose={() => setIsModalOpen(false)}
+                  />
+                )}
+              </div>
+            );
+          }
         },
         companyName: {
           type: 'text',
@@ -203,7 +279,45 @@ export const config: Config = {
           type: 'text',
         },
         imgSrc: {
-          type: 'text',
+          type: 'custom',
+          render: ({ name, value, onChange }) => {
+            const [isModalOpen, setIsModalOpen] = useState(false);
+
+            return (
+              <div>
+                <div className="flex items-center gap-2">
+                  <input 
+                    type="text" 
+                    value={value} 
+                    onChange={(e) => onChange(e.target.value)}
+                    className="flex-1 p-2 border rounded"
+                  />
+                  <button
+                    onClick={() => setIsModalOpen(true)}
+                    className="px-4 py-2 text-white bg-indigo-600 rounded hover:bg-indigo-700"
+                  >
+                    Browse
+                  </button>
+                </div>
+                {value && (
+                  <div className="mt-2">
+                    <img 
+                      src={value} 
+                      alt="Preview" 
+                      className="object-contain h-32 max-w-full"
+                    />
+                  </div>
+                )}
+                {isModalOpen && (
+                  <ImagePicker
+                    value={value}
+                    onChange={onChange}
+                    onClose={() => setIsModalOpen(false)}
+                  />
+                )}
+              </div>
+            );
+          }
         },
         imgHeight: {
           type: 'number',
@@ -329,18 +443,94 @@ export const config: Config = {
             ]
           },
           image1Url: {
-            type: 'text' as const,
+            type: 'custom' as const,
+            render: ({ name, value, onChange }) => {
+              const [isModalOpen, setIsModalOpen] = useState(false);
+
+              return (
+                <div>
+                  <div className="flex items-center gap-2">
+                    <input 
+                      type="text" 
+                      value={value} 
+                      onChange={(e) => onChange(e.target.value)}
+                      className="flex-1 p-2 border rounded"
+                    />
+                    <button
+                      onClick={() => setIsModalOpen(true)}
+                      className="px-4 py-2 text-white bg-indigo-600 rounded hover:bg-indigo-700"
+                    >
+                      Browse
+                    </button>
+                  </div>
+                  {value && (
+                    <div className="mt-2">
+                      <img 
+                        src={value} 
+                        alt="Preview" 
+                        className="object-contain h-32 max-w-full"
+                      />
+                    </div>
+                  )}
+                  {isModalOpen && (
+                    <ImagePicker
+                      value={value}
+                      onChange={onChange}
+                      onClose={() => setIsModalOpen(false)}
+                    />
+                  )}
+                </div>
+              );
+            }
           },
           image1Alt: {
             type: 'text' as const,
           }
         };
 
-        if (data.props.count == 2) {
+        if (data.props.count == '2') {
           return {
             ...fields,
             image2Url: {
-              type: 'text',
+              type: 'custom',
+              render: ({ name, value, onChange }) => {
+                const [isModalOpen, setIsModalOpen] = useState(false);
+
+                return (
+                  <div>
+                    <div className="flex items-center gap-2">
+                      <input 
+                        type="text" 
+                        value={value} 
+                        onChange={(e) => onChange(e.target.value)}
+                        className="flex-1 p-2 border rounded"
+                      />
+                      <button
+                        onClick={() => setIsModalOpen(true)}
+                        className="px-4 py-2 text-white bg-indigo-600 rounded hover:bg-indigo-700"
+                      >
+                        Browse
+                      </button>
+                    </div>
+                    {value && (
+                      <div className="mt-2">
+                        <img 
+                          src={value} 
+                          alt="Preview" 
+                          className="object-contain h-32 max-w-full"
+                        />
+                      </div>
+                    )}
+                    {isModalOpen && (
+                      <ImagePicker
+                        value={value}
+                        onChange={onChange}
+                        onClose={() => setIsModalOpen(false)}
+                      />
+                    )}
+                  </div>
+                );
+              }
             },
             image2Alt: {
               type: 'text',
