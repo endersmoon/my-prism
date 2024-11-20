@@ -7,6 +7,8 @@ import HeaderSection from'@/components/headerSection'
 import FooterSection from '@/components/footerSection';
 import NumberedListSection from '@/components/numberedListSection';
 import SurveySection from '@/components/survey';
+import { ImagePicker } from '@/components/ImagePicker';
+import { useState } from 'react';
 
 export const config: Config = {
   components: {
@@ -387,7 +389,45 @@ export const config: Config = {
     Image: {
       fields: {
         src: {
-          type: 'text',
+          type: 'custom',
+          render: ({ name, value, onChange }) => {
+            const [isModalOpen, setIsModalOpen] = useState(false);
+
+            return (
+              <div>
+                <div className="flex items-center gap-2">
+                  <input 
+                    type="text" 
+                    value={value} 
+                    onChange={(e) => onChange(e.target.value)}
+                    className="flex-1 p-2 border rounded"
+                  />
+                  <button
+                    onClick={() => setIsModalOpen(true)}
+                    className="px-4 py-2 text-white bg-indigo-600 rounded hover:bg-indigo-700"
+                  >
+                    Browse
+                  </button>
+                </div>
+                {value && (
+                  <div className="mt-2">
+                    <img 
+                      src={value} 
+                      alt="Preview" 
+                      className="object-contain h-32 max-w-full"
+                    />
+                  </div>
+                )}
+                {isModalOpen && (
+                  <ImagePicker
+                    value={value}
+                    onChange={onChange}
+                    onClose={() => setIsModalOpen(false)}
+                  />
+                )}
+              </div>
+            );
+          }
         },
         alt: {
           type: 'text',
