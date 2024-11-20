@@ -7,26 +7,70 @@ import HeaderSection from'@/components/headerSection'
 
 export const config: Config = {
   components: {
-    HeaderSection:{
-      fields:{
-        variant:{
-          type:"select",
+    HeaderSection: {
+      fields: {
+        variant: {
+          type: "select",
           options: [
             { label: "Centered", value: "centered" },
             { label: "Side", value: "side" },
             { label: "Social", value: "social" },
           ],
-        }
+        },
+        logoUrl: {
+          type: "text",
+        },
+        logoAlt: {
+          type: "text",
+        },
+        logoHeight: {
+          type: "text",
+        },
+        links: {
+          type: "array",
+          arrayFields: {
+            text: { type: "text" },
+            href: { type: "text" },
+          },
+        },
+        socialLinks: {
+          type: "array",
+          arrayFields: {
+            icon: { type: "text" },
+            alt: { type: "text" },
+            href: { type: "text" },
+          },
+        },
       },
-      defaultProps:{
-        variant:"centered"
+      defaultProps: {
+        variant: "centered",
+        logoUrl: "https://react.email/static/logo-without-background.png",
+        logoAlt: "React Email logo",
+        logoHeight: "42",
+        links: [
+          { text: "About", href: "#" },
+          { text: "Blog", href: "#" },
+          { text: "Company", href: "#" },
+          { text: "Features", href: "#" },
+        ],
+        socialLinks: [
+          { icon: "https://react.email/static/x-logo.png", alt: "X", href: "#" },
+          { icon: "https://react.email/static/instagram-logo.png", alt: "Instagram", href: "#" },
+          { icon: "https://react.email/static/facebook-logo.png", alt: "Facebook", href: "#" },
+        ],
       },
-      render:({variant})=>{
-        return(
-          <HeaderSection type={variant} />
-        )
+      render: ({ variant, logoUrl, logoAlt, logoHeight, links, socialLinks }) => {
+        return (
+          <HeaderSection 
+            type={variant}
+            logoUrl={logoUrl}
+            logoAlt={logoAlt}
+            logoHeight={logoHeight}
+            links={links}
+            socialLinks={socialLinks}
+          />
+        );
       }
-
     },
     SectionHeader: {
       fields: {

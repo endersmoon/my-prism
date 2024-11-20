@@ -1,5 +1,22 @@
 import { Section, Row, Column, Img, Link } from '@react-email/components';
-let HeaderSection = ({ type }) => {
+
+let HeaderSection = ({ 
+  type, 
+  logoUrl = 'https://react.email/static/logo-without-background.png',
+  logoAlt = 'React Email logo',
+  logoHeight = '42',
+  links = [
+    { text: 'About', href: '#' },
+    { text: 'Blog', href: '#' },
+    { text: 'Company', href: '#' },
+    { text: 'Features', href: '#' }
+  ],
+  socialLinks = [
+    { icon: 'https://react.email/static/x-logo.png', alt: 'X', href: '#' },
+    { icon: 'https://react.email/static/instagram-logo.png', alt: 'Instagram', href: '#' },
+    { icon: 'https://react.email/static/facebook-logo.png', alt: 'Facebook', href: '#' }
+  ]
+}) => {
     return(
         type == 'centered' ? (
           <Section
@@ -14,9 +31,9 @@ let HeaderSection = ({ type }) => {
             <Row>
               <Column align='center'>
                 <Img
-                  alt='React Email logo'
-                  height='42'
-                  src='https://react.email/static/logo-without-background.png'
+                  alt={logoAlt}
+                  height={logoHeight}
+                  src={logoUrl}
                 />
               </Column>
             </Row>
@@ -24,46 +41,18 @@ let HeaderSection = ({ type }) => {
               <Column align='center'>
                 <table>
                   <tr>
-                    <td style={{ paddingRight: 8, paddingLeft: 8 }}>
-                      <Link
-                        href='#'
-                        style={{
-                          color: 'rgb(75,85,99)',
-                          textDecoration: 'none',
-                        }}>
-                        About
-                      </Link>
-                    </td>
-                    <td style={{ paddingRight: 8, paddingLeft: 8 }}>
-                      <Link
-                        href='#'
-                        style={{
-                          color: 'rgb(75,85,99)',
-                          textDecoration: 'none',
-                        }}>
-                        Blog
-                      </Link>
-                    </td>
-                    <td style={{ paddingRight: 8, paddingLeft: 8 }}>
-                      <Link
-                        href='#'
-                        style={{
-                          color: 'rgb(75,85,99)',
-                          textDecoration: 'none',
-                        }}>
-                        Company
-                      </Link>
-                    </td>
-                    <td style={{ paddingRight: 8, paddingLeft: 8 }}>
-                      <Link
-                        href='#'
-                        style={{
-                          color: 'rgb(75,85,99)',
-                          textDecoration: 'none',
-                        }}>
-                        Features
-                      </Link>
-                    </td>
+                    {links.map((link, index) => (
+                      <td key={index} style={{ paddingRight: 8, paddingLeft: 8 }}>
+                        <Link
+                          href={link.href}
+                          style={{
+                            color: 'rgb(75,85,99)',
+                            textDecoration: 'none',
+                          }}>
+                          {link.text}
+                        </Link>
+                      </td>
+                    ))}
                   </tr>
                 </table>
               </Column>
@@ -82,9 +71,9 @@ let HeaderSection = ({ type }) => {
             <Row>
               <Column style={{ width: '80%' }}>
                 <Img
-                  alt='React Email logo'
-                  height='42'
-                  src='https://react.email/static/logo-without-background.png'
+                  alt={logoAlt}
+                  height={logoHeight}
+                  src={logoUrl}
                 />
               </Column>
               <Column align='right'>
@@ -125,52 +114,29 @@ let HeaderSection = ({ type }) => {
             <Row>
               <Column style={{ width: '80%' }}>
                 <Img
-                  alt='React Email logo'
-                  height='42'
-                  src='https://react.email/static/logo-without-background.png'
+                  alt={logoAlt}
+                  height={logoHeight}
+                  src={logoUrl}
                 />
               </Column>
               <Column align='right'>
                 <Row align='right'>
-                  <Column>
-                    <Link href='#'>
-                      <Img
-                        alt='X'
-                        height='36'
-                        src='https://react.email/static/x-logo.png'
-                        style={{
-                          marginLeft: 4,
-                          marginRight: 4,
-                        }}
-                        width='36'
-                      />
-                    </Link>
-                  </Column>
-                  <Column>
-                    <Link href='#'>
-                      <Img
-                        alt='Instagram'
-                        height='36'
-                        src='https://react.email/static/instagram-logo.png'
-                        style={{
-                          marginLeft: 4,
-                          marginRight: 4,
-                        }}
-                        width='36'
-                      />
-                    </Link>
-                  </Column>
-                  <Column>
-                    <Link href='#'>
-                      <Img
-                        alt='Facebook'
-                        height='36'
-                        src='https://react.email/static/facebook-logo.png'
-                        style={{ marginLeft: 4, marginRight: 4 }}
-                        width='36'
-                      />
-                    </Link>
-                  </Column>
+                  {socialLinks.map((social, index) => (
+                    <Column key={index}>
+                      <Link href={social.href}>
+                        <Img
+                          alt={social.alt}
+                          height='36'
+                          src={social.icon}
+                          style={{
+                            marginLeft: 4,
+                            marginRight: 4,
+                          }}
+                          width='36'
+                        />
+                      </Link>
+                    </Column>
+                  ))}
                 </Row>
               </Column>
             </Row>
