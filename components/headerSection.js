@@ -78,27 +78,15 @@ let HeaderSection = ({
               </Column>
               <Column align='right'>
                 <Row align='right'>
-                  <Column style={{ paddingLeft: 8, paddingRight: 8 }}>
-                    <Link
-                      href='#'
-                      style={{ color: 'rgb(75,85,99)', textDecoration: 'none' }}>
-                      About
-                    </Link>
-                  </Column>
-                  <Column style={{ paddingLeft: 8, paddingRight: 8 }}>
-                    <Link
-                      href='#'
-                      style={{ color: 'rgb(75,85,99)', textDecoration: 'none' }}>
-                      Company
-                    </Link>
-                  </Column>
-                  <Column style={{ paddingLeft: 8, paddingRight: 8 }}>
-                    <Link
-                      href='#'
-                      style={{ color: 'rgb(75,85,99)', textDecoration: 'none' }}>
-                      Blog
-                    </Link>
-                  </Column>
+                  {links.map((link, index) => (
+                    <Column key={index} style={{ paddingLeft: 8, paddingRight: 8 }}>
+                      <Link
+                        href={link.href}
+                        style={{ color: 'rgb(75,85,99)', textDecoration: 'none' }}>
+                        {link.text}
+                      </Link>
+                    </Column>
+                  ))}
                 </Row>
               </Column>
             </Row>

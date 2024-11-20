@@ -4,6 +4,8 @@ import { Container } from '@react-email/components';
 import { Config } from '@measured/puck';
 import ArticleSection from '@/components/article';
 import HeaderSection from'@/components/headerSection'
+import FooterSection from '@/components/footerSection';
+import NumberedListSection from '@/components/numberedListSection';
 
 export const config: Config = {
   components: {
@@ -33,14 +35,44 @@ export const config: Config = {
             href: { type: "text" },
           },
         },
-        socialLinks: {
-          type: "array",
-          arrayFields: {
-            icon: { type: "text" },
-            alt: { type: "text" },
-            href: { type: "text" },
+      },
+      resolveFields: (data) => {
+        const fields = {
+          variant: {
+            type: "select" as const,
+            options: [
+              { label: "Centered", value: "centered" },
+              { label: "Side", value: "side" },
+              { label: "Social", value: "social" },
+            ],
           },
-        },
+          logoUrl: { type: "text" as const },
+          logoAlt: { type: "text" as const },
+          logoHeight: { type: "text" as const },
+          links: {
+            type: "array" as const,
+            arrayFields: {
+              text: { type: "text" },
+              href: { type: "text" },
+            },
+          },
+        };
+
+        if (data.props.variant === "social") {
+          return {
+            ...fields,
+            socialLinks: {
+              type: "array",
+              arrayFields: {
+                icon: { type: "text" },
+                alt: { type: "text" },
+                href: { type: "text" },
+              },
+            },
+          };
+        }
+
+        return fields;
       },
       defaultProps: {
         variant: "centered",
@@ -207,6 +239,97 @@ export const config: Config = {
             description={description}
             link={link}
             btnText={btnText}
+          />
+        );
+      },
+    },
+    FooterSection: {
+      fields: {
+        logoSrc: {
+          type: 'text',
+        },
+        companyName: {
+          type: 'text',
+        },
+        tagline: {
+          type: 'text',
+        },
+        address: {
+          type: 'text',
+        },
+        contactInfo: {
+          type: 'text',
+        },
+        socialLinks: {
+          type: 'object',
+          fields: {
+            facebook: { type: 'text' },
+            twitter: { type: 'text' },
+            instagram: { type: 'text' },
+          },
+        },
+      },
+      defaultProps: {
+        logoSrc: 'https://react.email/static/logo-without-background.png',
+        companyName: 'Acme corporation',
+        tagline: 'Think different',
+        address: '123 Main Street Anytown, CA 12345',
+        contactInfo: 'mail@example.com +123456789',
+        socialLinks: {
+          facebook: '#',
+          twitter: '#',
+          instagram: '#'
+        }
+      },
+      render: ({ logoSrc, companyName, tagline, address, contactInfo, socialLinks }) => {
+        return (
+          <FooterSection 
+            logoSrc={logoSrc}
+            companyName={companyName}
+            tagline={tagline}
+            address={address}
+            contactInfo={contactInfo}
+            socialLinks={socialLinks}
+          />
+        );
+      }
+    },
+    NumberedListSection: {
+      fields: {
+        heading: {
+          type: 'text',
+        },
+        description: {
+          type: 'text',
+        },
+        items: {
+          type: 'array',
+          arrayFields: {
+            title: { type: 'text' },
+            description: { type: 'text' },
+          },
+        },
+      },
+      defaultProps: {
+        heading: 'Steps to Success',
+        description: 'Follow these steps to achieve your goals',
+        items: [
+          {
+            title: 'First Step',
+            description: 'Begin your journey here with the first important step.',
+          },
+          {
+            title: 'Second Step',
+            description: 'Continue making progress with this crucial step.',
+          },
+        ],
+      },
+      render: ({ heading, description, items }) => {
+        return (
+          <NumberedListSection
+            heading={heading}
+            description={description}
+            items={items}
           />
         );
       },
